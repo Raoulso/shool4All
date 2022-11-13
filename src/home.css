@@ -1,0 +1,12 @@
+
+  .card{
+    display: block;
+    text-align: center;
+    width: 38rem;    
+    justify-content: center;    
+  }
+ 
+  .navigate{ 
+    display: flex;
+    flex-direction: column;   
+  }
