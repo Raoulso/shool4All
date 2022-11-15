@@ -11,13 +11,7 @@ function LoginPage() {
     setCredential(credential);
 
   }
-  const some1 = (a,b)=>{
-    return a+b
-
-  }
-  const some2 = (a,b)=> a+b;
-
-  const some3 = (a,b)=> ()=>some2(a,b)
+  
   
 
   const doLogin = ()=> {
@@ -41,11 +35,11 @@ function LoginPage() {
     } 
   };
   return (
-    <div className="contain-fluid card">
-      <div className="" >  
+    <div className="card">
+       
       
         <Card >
-          
+        
           <Card.Body>
             <Form.Control type="email" placeholder="Enter Username" onChange={handleChange("username")} value = {credential.username} className="m-3"/>
 
@@ -56,7 +50,7 @@ function LoginPage() {
             </Button>
           </Card.Body>
         </Card>
-      </div>
+      
     </div>
   );
 }
