@@ -2,8 +2,13 @@
     display: block;
     text-align: center;
     width: 38rem;    
-    justify-content: center; 
-    align-items: center;  
+      
     background-color: darkgray; 
     margin-top: 100px;
+  }
+  .btnLogOut{
+    display: flex;
+    justify-content: end;
+    margin: 10px 10px 10px 0px;
+    
   }
