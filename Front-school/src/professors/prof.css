@@ -1,0 +1,24 @@
+.profHome{
+    display: block;
+    background-color: lavender;
+    width: 38rem;    
+    text-align: center;   
+    margin-top: 100px;
+  }
+  .btnLogOut{
+    display: flex;
+       
+    justify-content: end; 
+    margin: 10px 10px 10px 0px;
+  }
+  .divMaterie{
+    display: flex;
+       
+    justify-content: center; 
+    margin-bottom: 10px;
+  }
+  .btnMaterie{
+    width: 10rem;
+    border-radius: 50%;
+    margin: 0px 10px 0px 0px;
+  }

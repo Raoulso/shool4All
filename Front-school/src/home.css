@@ -1,0 +1,14 @@
+
+  .card{
+    display: flex;
+    text-align: center;
+    width: 38rem;    
+    justify-content: center; 
+    align-items: center;   
+    margin-top: 100px;
+  }
+ 
+  .navigate{ 
+    display: flex;
+    flex-direction: column;   
+  }
