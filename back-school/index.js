@@ -11,6 +11,8 @@ const db = {
     { id: 1, label: "Mathematique" },
     { id: 2, label: "english" },
     { id: 3, label: "fisic" },
+    { id: 4, label: "Chemistry" },
+    { id: 5, label: "History" },
   ],
   user_has_topic: [
     { id_topic: 1, id_user: 1 },
@@ -30,6 +32,7 @@ const ORIGINS = "*";
 app.post("/login", async (req, res) => {
   console.log("body");
   console.log(req.body);
+
   console.log("body");
   res.send(db.users[0]);
 });
