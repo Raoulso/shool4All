@@ -8,12 +8,13 @@ const db = {
     { id: 2, email: "stud", name: "kala", role: "stud" },
   ],
   topics: [
-    { id: 1, label: "maths" },
+    { id: 1, label: "Mathematique" },
     { id: 2, label: "english" },
     { id: 3, label: "fisic" },
   ],
   user_has_topic: [
     { id_topic: 1, id_user: 1 },
+    { id_topic: 1, id_user: 2 },
     { id_topic: 3, id_user: 2 },
     { id_topic: 2, id_user: 1 },
   ],
@@ -21,11 +22,15 @@ const db = {
 
 const cors = require("cors");
 const app = express();
-
-const PORT = 8082;
+app.use(express.json());
+app.use(express.urlencoded());
+const PORT = 8083;
 const ORIGINS = "*";
 
-app.get("/login", async (req, res) => {
+app.post("/login", async (req, res) => {
+  console.log("body");
+  console.log(req.body);
+  console.log("body");
   res.send(db.users[0]);
 });
 
@@ -37,6 +42,31 @@ app.get("/register", async (req, res) => {
   db.user_has_topic.push({ id_user: idU, id_topic: idT });
 
   res.send({ resutl: true, message: "update ok" });
+});
+
+app.get("/api/students", async (req, res) => {
+  const idUser = req.query.id;
+
+  const topics = db.user_has_topic.filter((us) => us.id_user == idUser);
+  const mappedTopic = topics.map((ut) => {
+    const topic = db.topics.find((to) => to.id == ut.id_topic);
+    return topic;
+  });
+
+  res.send(mappedTopic);
+});
+
+app.get("/api/students/:id", async (req, res) => {
+  const idUser = req.query.id;
+
+  console.log(db.user_has_topic);
+  const topics = db.user_has_topic.filter((us) => us.id_user == idUser);
+  const mappedTopic = topics.map((ut) => {
+    const topic = db.topics.find((to) => to.id == ut.id_topic);
+    return topic;
+  });
+
+  res.send(mappedTopic);
 });
 
 app.get("/api/test", async (req, res) => {
