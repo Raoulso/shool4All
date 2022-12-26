@@ -26,17 +26,15 @@ const filtra = (a) => {
   }
   return false;
 };
-function StudentHome() {
+function StudentHome(props) {
   const [topicLabel, setTopicLabel]= useState([]);
   const [dataStudent, setDataStudent] = useState([...getStudentDataById(1)]);
 
   useEffect( ()=> { 
     const urlTopic = "http://localhost:8082/topic";
     
-    axios.get(urlTopic).then(res=>{
-      
-      setTopicLabel(res.data)
-      console.log(res.data)
+    axios.get(urlTopic).then(res=>{      
+      setTopicLabel(res.data);    
     })
   
     
@@ -44,7 +42,7 @@ function StudentHome() {
   return (
     <div className="studi">
       <div className="btnLogOut">
-      <button type="button" className="btn btn-danger">Log out</button>
+      <button type="button" className="btn btn-danger" onClick={props.myLogout}>Log out</button>
       </div>
       <h2>Libretto</h2>
       
@@ -68,8 +66,8 @@ function StudentHome() {
       </table>
       <div>
       {
-    topicLabel.map((topicLabel)=>(
-    <h3 >{topicLabel.label} </h3>))
+    topicLabel.map((topicLabel, id)=>(
+    <h3 key={id}>{topicLabel.label} </h3>))
   }
       </div>
     </div>
