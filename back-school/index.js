@@ -4,8 +4,8 @@ const express = require("express");
 
 const db = {
   users: [
-    { id: 1, email: "prof", name: "prof", role: "prof" },
-    { id: 2, email: "stud", name: "kala", role: "stud" },
+    { id: 1, email: "prof", name: "prof", password: "prof", role: "TECHEAR" },
+    { id: 2, email: "stud", name: "kala", password: "stud", role: "STUDENTE" },
   ],
   topics: [
     { id: 1, label: "Mathematique" },
@@ -30,11 +30,18 @@ const PORT = 8083;
 const ORIGINS = "*";
 
 app.post("/login", async (req, res) => {
-  console.log("body");
-  console.log(req.body);
-
-  console.log("body");
-  res.send(db.users[0]);
+  const { username, password } = req.body;
+  const user = db.users.find((u) => u.email === username);
+  if (!user) {
+    res.send({ error: true, message: "username don't exists" });
+  } else {
+    if (user.password != password) {
+      res.send({ error: true, message: "wrong password " });
+    } else {
+      const data = { role: user.role, name: user.name, id: user.id, username };
+      res.send(data);
+    }
+  }
 });
 
 app.get("/register", async (req, res) => {
