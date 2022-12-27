@@ -4,8 +4,34 @@ const express = require("express");
 
 const db = {
   users: [
-    { id: 1, email: "prof", name: "prof", password: "prof", role: "TECHEAR" },
-    { id: 2, email: "stud", name: "kala", password: "stud", role: "STUDENTE" },
+    {
+      id: 1,
+      email: "prof1",
+      name: "prof raoul",
+      password: "prof",
+      role: "TECHEAR",
+    },
+    {
+      id: 2,
+      email: "stud1",
+      name: "prinad studen",
+      password: "stud",
+      role: "STUDENTE",
+    },
+    {
+      id: 3,
+      email: "prof2",
+      name: "briand prof",
+      password: "prof",
+      role: "TECHEAR",
+    },
+    {
+      id: 4,
+      email: "stud2",
+      name: "student raoul",
+      password: "stud",
+      role: "STUDENTE",
+    },
   ],
   topics: [
     { id: 1, label: "Mathematique" },
