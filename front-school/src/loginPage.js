@@ -5,9 +5,13 @@ import axios from "axios";
 import "./home.css";
 
 const ROLE = {
-  prof: 'prof',
-  stud : 'stud'
-}
+  prof: "prof",
+  stud: "stud",
+};
+const PASSWORD = {
+  prof: "prof",
+  stud: "stud",
+};
 function LoginPage() {
   const [credential, setCredential] = useState([]);
   const redirect = useNavigate();
@@ -25,24 +29,21 @@ function LoginPage() {
     const urlLogin = "http://localhost:8082/login";
     const res = await axios.post(
       urlLogin,
-      { headers },
-      { username: credential.username }
+      
+      { username: credential.username, password: credential.password}
     );
-
-    
 
     // cic on appel certain credential depuis le back
     return res.data;
   };
   const login = async () => {
-
     // appel backend
     const dat = await doLogin();
 
-    if (dat[0].role === ROLE.prof) {
+    if (dat.role === ROLE.prof && dat.password === PASSWORD.prof ) {
       //entre dans ProfLogin
       redirect("/profHome");
-    } else if (dat[1].role === ROLE.stud) {
+    } else if (dat.role === ROLE.stud && dat.password === PASSWORD.stud) {
       //entre dans StudentHome
       redirect("/studentHome");
     }
