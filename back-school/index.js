@@ -25,12 +25,15 @@ const db = {
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded());
 const PORT = 8083;
 const ORIGINS = "*";
+app.use(cors(ORIGINS));
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log("for login , i receive this body---------------");
+  console.log(req.body);
+  console.log("----------------------------------------------");
   const user = db.users.find((u) => u.email === username);
   if (!user) {
     res.send({ error: true, message: "username don't exists" });
