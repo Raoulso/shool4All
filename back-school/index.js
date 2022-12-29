@@ -57,9 +57,6 @@ app.use(cors(ORIGINS));
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log("for login , i receive this body---------------");
-  console.log(req.body);
-  console.log("----------------------------------------------");
   const user = db.users.find((u) => u.email === username);
   if (!user) {
     res.send({ error: true, message: "username don't exists" });
@@ -71,6 +68,21 @@ app.post("/login", async (req, res) => {
       res.send(data);
     }
   }
+});
+
+app.get("/api/topics", async (req, res) => {
+  res.send(db.topics);
+});
+
+app.get("/api/students/topics", async (req, res) => {
+  const idUser = req.query.idStudent;
+  console.log(req.query);
+  const topics = db.user_has_topic.filter((us) => us.id_user == idUser);
+  const mappedTopic = topics.map((ut) => {
+    const topic = db.topics.find((to) => to.id == ut.id_topic);
+    return topic;
+  });
+  res.send(mappedTopic);
 });
 
 app.get("/register", async (req, res) => {
