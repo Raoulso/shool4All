@@ -75,7 +75,7 @@ app.get("/api/topics", async (req, res) => {
   res.send(db.topics);
 });
 
-//ok
+//ok idStudent est le parametre
 app.get("/api/students/topics", async (req, res) => {
   const idUser = req.query.idStudent;
   console.log(req.query);
@@ -88,7 +88,7 @@ app.get("/api/students/topics", async (req, res) => {
   res.send(topics);
 });
 
-// ok
+// ok idProf est le parametre
 app.get("/api/professor/topics", async (req, res) => {
   const idUser = req.query.idProf;
   const topics = db.user_has_topic.filter((us) => us.id_user == idUser);
@@ -98,7 +98,7 @@ app.get("/api/professor/topics", async (req, res) => {
 app.get("/api/professor/students", async (req, res) => {
   res.send(db.users);
 });
-// ok
+// ok  ici il faut le path variable parametre
 app.get("/api/professor/topics/:id/students", async (req, res) => {
   const idTopic = req.params.id;
   const students = db.user_has_topic.filter((us) => us.id_topic == idTopic);
