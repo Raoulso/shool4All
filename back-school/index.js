@@ -19,6 +19,13 @@ const db = {
       role: "STUDENTE",
     },
     {
+      id: 5,
+      email: "stud5",
+      name: "BERNARD ",
+      password: "stud",
+      role: "STUDENTE",
+    },
+    {
       id: 3,
       email: "prof2",
       name: "briand prof",
@@ -45,6 +52,20 @@ const db = {
     { id_topic: 1, id_user: 2, grade: 20 },
     { id_topic: 3, id_user: 2, grade: 25 },
     { id_topic: 2, id_user: 1, grade: 30 },
+    { id_topic: 1, id_user: 5, grade: 28 },
+    { id_topic: 3, id_user: 5, grade: 25 },
+    { id_topic: 2, id_user: 5, grade: 30 },
+
+    //PROF
+    { id_topic: 1, id_user: 3, grade: 0 },
+    { id_topic: 2, id_user: 3, grade: 0 },
+    { id_topic: 3, id_user: 3, grade: 0 },
+    { id_topic: 4, id_user: 3, grade: 0 },
+
+    { id_topic: 1, id_user: 4, grade: 0 },
+    { id_topic: 2, id_user: 4, grade: 0 },
+    { id_topic: 3, id_user: 4, grade: 0 },
+    { id_topic: 4, id_user: 4, grade: 0 },
   ],
 };
 
@@ -55,6 +76,7 @@ const PORT = 8083;
 const ORIGINS = "*";
 app.use(cors(ORIGINS));
 
+// good Api
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = db.users.find((u) => u.email === username);
@@ -105,13 +127,24 @@ app.get("/api/professor/topics/:id/students", async (req, res) => {
   res.send(students);
 });
 
+app.get("/api/prof/:idProd/topics/:idTopic", async (req, res) => {
+  const idProd = req.query.idProd;
+  const idTopic = req.query.idTopic;
+
+  console.log(idProd);
+  console.log(idTopic);
+
+  const topics = db.user_has_topic.filter(
+    (us) => us.id_user != idProd && us.id_topic == idTopic
+  );
+
+  res.send(topics);
+});
+
 app.get("/register", async (req, res) => {
   const idU = Number(req.query.idT);
-
   const idT = Number(req.query.idU);
-
   db.user_has_topic.push({ id_user: idU, id_topic: idT });
-
   res.send({ resutl: true, message: "update ok" });
 });
 
@@ -140,26 +173,6 @@ app.get("/api/students/:id", async (req, res) => {
   res.send(mappedTopic);
 });
 
-app.get("/api/events", async (req, res) => {
-  res.send(db.topics);
-});
-
-app.get("/api/events/:id", async (req, res) => {
-  console.log(req.params);
-  res.send(db.topics);
-});
-
-app.post("/api/events", async (req, res) => {
-  const data = req.body;
-  console.log(data);
-  res.send(db.topics);
-});
-
-app.put("/api/events", async (req, res) => {
-  const data = req.body;
-  console.log(data);
-  res.send(db.topics);
-});
 const server = app.listen(PORT, () => {
   console.log(`SERVER START ON PORT : ${PORT} ...`);
 });
