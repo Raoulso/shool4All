@@ -126,6 +126,25 @@ app.get("/api/professor/topics/:id/students", async (req, res) => {
   const students = db.user_has_topic.filter((us) => us.id_topic == idTopic);
   res.send(students);
 });
+/**
+ {
+"idTopic" : 1,
+"grade" : 60,
+"idUser" : 1
+}
+ */
+app.post("/api/grades", async (req, res) => {
+  const body = req.body;
+  for (let i = 0; i < db.user_has_topic.length; i++) {
+    if (
+      body.idUser == db.user_has_topic[i].id_user &&
+      body.idTopic == db.user_has_topic[i].id_topic
+    ) {
+      db.user_has_topic[i].grade = body.grade;
+    }
+  }
+  res.send({ result: true, message: "changemon ok" });
+});
 
 app.get("/api/prof/:idProd/topics/:idTopic", async (req, res) => {
   const idProd = req.query.idProd;
